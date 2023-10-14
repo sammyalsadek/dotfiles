@@ -1,7 +1,7 @@
 # dotfiles
 The purpose of this repository is to store all of my dotfiles.
 
-To setup a new machine to pull these fot files, follow the following steps:
+To setup a new machine to pull these dot files, follow the steps below:
 ```
 cd ~
 git init
@@ -10,7 +10,7 @@ git fetch
 git checkout -f master
 ```
 
-In order to track a new dot file and override the .gitignore congiguration run the following command
+In order to track a new dot file and override the .gitignore configuration, run the following command:
 ```
 git add -f <filename>
 ```
