@@ -14,10 +14,19 @@ set relativenumber
 " Editor theme
 colorscheme retrobox
 set background=dark
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color GNU screen.
+  set t_ut=
+endif
 
 " Display the name of the current file
 set laststatus=2
 
+" Set tabs to be 4 spaces
+set shiftwidth=4 smarttab
+set expandtab
+set tabstop=8 softtabstop=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Finding files					      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
