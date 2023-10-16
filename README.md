@@ -7,7 +7,7 @@ cd ~
 git init
 git remote add origin https://github.com/sammyalsadek/dotfiles.git
 git fetch
-git checkout -f master
+git checkout -f main
 ```
 
 In order to track a new dot file and override the .gitignore configuration, run the following command:
