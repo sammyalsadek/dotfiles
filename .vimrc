@@ -12,7 +12,11 @@ set number
 set relativenumber
 
 " Editor theme
-colorscheme retrobox
+try
+    colorscheme retrobox
+catch
+    colorscheme slate
+endtry
 set background=dark
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
