@@ -31,6 +31,10 @@ set laststatus=2
 set shiftwidth=4 smarttab
 set expandtab
 set tabstop=8 softtabstop=0
+
+" Fixing backspace issue to delete character placed before insert mode
+set backspace=indent,eol,start
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Finding files					      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
