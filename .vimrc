@@ -11,10 +11,6 @@ syntax enable
 set number
 set relativenumber
 
-" Keep the cursor in the center of the screen
-nnoremap j jzz
-nnoremap k kzz
-
 " Editor theme
 try
     colorscheme retrobox
