@@ -11,6 +11,10 @@ syntax enable
 set number
 set relativenumber
 
+" Keep the cursor in the center of the screen
+nnoremap j jzz
+nnoremap k kzz
+
 " Editor theme
 try
     colorscheme retrobox
@@ -36,7 +40,7 @@ set tabstop=8 softtabstop=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
-set path+=**
+" - set path+=**
 
 " Display all matching files when we tab complete
 set wildmenu
@@ -63,3 +67,18 @@ command! MakeTags !ctags -R .
 "
 " Now we can
 " - Use Ctrl-n and Ctrl-p to go back and forth in the suggestion list
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom Remappings					                "	
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Keep the cursor in the center of the screen
+nnoremap j jzz
+nnoremap k kzz
+nnoremap { {zz
+nnoremap } }zz
+nnoremap <c-u> <c-u>zz
+nnoremap H Hzz
+nnoremap M Mzz
+nnoremap L Lzz
+nnoremap gg ggzz
+nnoremap G Gzz
