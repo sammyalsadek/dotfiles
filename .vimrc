@@ -19,13 +19,7 @@ if &term =~ '256color'
   " render properly when inside 256-color GNU screen.
   set t_ut=
 endif
-
-if (empty($TMUX) && getenv('TERM_PROGRAM') != 'Apple_Terminal')
-    if (has("termguicolors"))
-        set termguicolors
-    endif
-endif
-
+"
 " Display the name of the current file
 set laststatus=2
 
