@@ -4,24 +4,26 @@
 " Tell vim to not try to be vi
 set nocompatible
 
-" Enable syntax
-syntax enable
-
 " Show relative number column along with the current line number
 set number
 set relativenumber
 
+" Hide mode identifier (Pluggin installed to replace)
+set noshowmode
+
 " Editor theme
-try
-    colorscheme retrobox
-catch
-    colorscheme slate
-endtry
 set background=dark
+
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
   " render properly when inside 256-color GNU screen.
   set t_ut=
+endif
+
+if (empty($TMUX) && getenv('TERM_PROGRAM') != 'Apple_Terminal')
+    if (has("termguicolors"))
+        set termguicolors
+    endif
 endif
 
 " Display the name of the current file
@@ -82,3 +84,26 @@ nnoremap M Mzz
 nnoremap L Lzz
 nnoremap gg ggzz
 nnoremap G Gzz
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins                                                               " 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin('~/.vim/bundle')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+call plug#end()
+
+let g:airline_theme='gruvbox'
+colorscheme gruvbox
