@@ -73,11 +73,23 @@ nnoremap k kzz
 nnoremap { {zz
 nnoremap } }zz
 nnoremap <c-u> <c-u>zz
+nnoremap <c-d> <c-d>zz
 nnoremap H Hzz
 nnoremap M Mzz
 nnoremap L Lzz
 nnoremap gg ggzz
 nnoremap G Gzz
+vnoremap j jzz
+vnoremap k kzz
+vnoremap { {zz
+vnoremap } }zz
+vnoremap <c-u> <c-u>zz
+vnoremap <c-d> <c-d>zz
+vnoremap H Hzz
+vnoremap M Mzz
+vnoremap L Lzz
+vnoremap gg ggzz
+vnoremap G Gzz
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                               " 
