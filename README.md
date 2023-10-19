@@ -19,5 +19,8 @@ git checkout -f main
 4. After pulling the repository, run the setup.sh script.
 `zsh setup.sh`
 
-5. In order to track a new dot file and override the .gitignore configuration, run the following command:
+5. After the script completes and access is given to yabai run the following command.
+`yabai --restart-service`
+
+6. In order to track a new dot file and override the .gitignore configuration, run the following command:
 `git add -f <filename>`

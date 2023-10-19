@@ -3,6 +3,8 @@
 # Install xcode dev tools, homebrew package manager, and oh-my-zsh
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv"")"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Set up windows manager on MacOS
@@ -47,6 +49,10 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     defaults write com.apple.Mail DisableSendAnimations -bool true
     defaults write com.apple.Mail DisableReplyAnimations -bool true
     killall Dock
+
+    # Install yabai windows manager
+    brew install koekeishiya/formulae/yabai
+    yabai --start-service
 fi
 
 brew install cmake python mono nodejs java vim screen
