@@ -7,7 +7,9 @@ The purpose of this repository is to store all of my dotfiles, and instructions 
 
 2. (If using mac) Open a few new desktops and go to system preferences -> keyboard -> keyboard shortcut, and enable mission control desktop switching by number.
 
-3. Pull the dotfiles repository by using the following commands.
+3. (If using mac) Go to system preferences -> keyboard -> keyboard shortcut -> modifier keys, and swap Ctrl and CAPS.
+
+4. Pull the dotfiles repository by using the following commands.
 ```
 cd ~
 git init
@@ -16,11 +18,11 @@ git fetch
 git checkout -f main
 ```
 
-4. After pulling the repository, run the setup.sh script.
+5. After pulling the repository, run the setup.sh script.
 `zsh setup.sh`
 
-5. After the script completes and access is given to yabai run the following command.
+6. After the script completes and access is given to yabai run the following command.
 `yabai --restart-service`
 
-6. In order to track a new dot file and override the .gitignore configuration, run the following command:
+7. In order to track a new dot file and override the .gitignore configuration, run the following command:
 `git add -f <filename>`
