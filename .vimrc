@@ -116,3 +116,5 @@ call plug#end()
 
 let g:airline_theme='gruvbox'
 colorscheme gruvbox
+
+hi Normal guibg=NONE ctermbg=NONE
