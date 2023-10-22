@@ -65,7 +65,44 @@ command! MakeTags !ctags -R .
 " - Use Ctrl-n and Ctrl-p to go back and forth in the suggestion list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom Remappings					                "	
+" Plugins                                                               "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin('~/.vim/bundle')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'w0rp/ale'
+call plug#end()
+
+let g:airline_theme='gruvbox'
+colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_completion_enabled = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom Remappings					                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keep the cursor in the center of the screen
 nnoremap j jzz
@@ -91,30 +128,7 @@ vnoremap L Lzz
 vnoremap gg ggzz
 vnoremap G Gzz
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins                                                               " 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
-
-call plug#begin('~/.vim/bundle')
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
-call plug#end()
-
-let g:airline_theme='gruvbox'
-colorscheme gruvbox
-
-hi Normal guibg=NONE ctermbg=NONE
+nnoremap gd :ALEGoToDefinition<CR>
+nnoremap gr :ALEFindReferences<CR>
+nnoremap gt :ALEGoToTypeDefinition<CR>
+nnoremap <c-]> :ALEGoToImplementation<CR>
