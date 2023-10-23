@@ -19,9 +19,6 @@ if &term =~ '256color'
   " render properly when inside 256-color GNU screen.
   set t_ut=
 endif
-"
-" Display the name of the current file
-set laststatus=2
 
 " Set tabs to be 4 spaces
 set shiftwidth=4 smarttab
@@ -30,6 +27,44 @@ set tabstop=8 softtabstop=0
 
 " Fixing backspace issue to delete character placed before insert mode
 set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Finding files					      			"
