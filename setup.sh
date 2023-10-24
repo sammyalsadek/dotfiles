@@ -55,8 +55,9 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     yabai --start-service
 fi
 
-brew install cmake python mono nodejs java vim screen
+brew install cmake python mono nodejs java vim screen fzf the_silver_searcher
 sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+$(brew --prefix)/opt/fzf/install
 
 echo "Rehashing..."
 rehash

@@ -121,6 +121,8 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'w0rp/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 let g:airline_theme='gruvbox'
@@ -166,4 +168,9 @@ vnoremap G Gzz
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap gr :ALEFindReferences<CR>
 nnoremap gt :ALEGoToTypeDefinition<CR>
-nnoremap <c-]> :ALEGoToImplementation<CR>
+nnoremap gh :ALEHover<CR>
+nnoremap gi :ALEGoToImplementation<CR>
+nnoremap gb <c-t>
+
+nnoremap <c-p> :Files<CR>
+nnoremap <c-f> :Ag<CR>
