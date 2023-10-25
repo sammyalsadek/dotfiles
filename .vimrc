@@ -120,7 +120,6 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
-Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -129,15 +128,6 @@ call plug#end()
 let g:airline_theme='gruvbox'
 colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\}
-let g:ale_fix_on_save = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_completion_autoimport = 1
-let g:ale_completion_enabled = 1
 
 let g:coc_global_extensions = ['coc-json', 'coc-xml', 'coc-yaml', 'coc-markdownlint', 'coc-clangd', 'coc-cmake', 'coc-java', 'coc-python', 'coc-sh', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-html-css-support', 'coc-vimlsp']
 
@@ -168,12 +158,12 @@ vnoremap L Lzz
 vnoremap gg ggzz
 vnoremap G Gzz
 
-nnoremap gd :ALEGoToDefinition<CR>
-nnoremap gr :ALEFindReferences<CR>
-nnoremap gt :ALEGoToTypeDefinition<CR>
-nnoremap gh :ALEHover<CR>
-nnoremap gi :ALEGoToImplementation<CR>
-nnoremap gb <c-t>
+" nnoremap gd :ALEGoToDefinition<CR>
+" nnoremap gr :ALEFindReferences<CR>
+" nnoremap gt :ALEGoToTypeDefinition<CR>
+" nnoremap gh :ALEHover<CR>
+" nnoremap gi :ALEGoToImplementation<CR>
+" nnoremap gb <c-t>
 
 nnoremap <c-p> :Files<CR>
 nnoremap <c-f> :Ag<CR>
