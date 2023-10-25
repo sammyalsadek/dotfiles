@@ -123,6 +123,7 @@ Plug 'tpope/vim-commentary'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 let g:airline_theme='gruvbox'
@@ -137,6 +138,8 @@ let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_completion_enabled = 1
+
+let g:coc_global_extensions = ['coc-json', 'coc-xml', 'coc-yaml', 'coc-markdownlint', 'coc-clangd', 'coc-cmake', 'coc-java', 'coc-python', 'coc-sh', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-html-css-support', 'coc-vimlsp']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Remappings					                "

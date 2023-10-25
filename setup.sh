@@ -55,9 +55,13 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     yabai --start-service
 fi
 
-brew install cmake python mono nodejs java vim screen fzf the_silver_searcher
+brew install cmake python mono node nvm java vim screen fzf the_silver_searcher
 sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 $(brew --prefix)/opt/fzf/install
+mkdir ~/.nvm
+export NVM_DIR="$HOME/.nvm"
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 echo "Rehashing..."
 rehash
