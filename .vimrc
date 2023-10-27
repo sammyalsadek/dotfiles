@@ -66,6 +66,14 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Finding files					      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -158,12 +166,27 @@ vnoremap L Lzz
 vnoremap gg ggzz
 vnoremap G Gzz
 
-" nnoremap gd :ALEGoToDefinition<CR>
-" nnoremap gr :ALEFindReferences<CR>
-" nnoremap gt :ALEGoToTypeDefinition<CR>
-" nnoremap gh :ALEHover<CR>
-" nnoremap gi :ALEGoToImplementation<CR>
-" nnoremap gb <c-t>
+" GoTo code navigation
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gt <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gb <c-t>
+nnoremap <silent> gh :call ShowDocumentation()<CR>
 
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Fuzzy finding files and text
 nnoremap <c-p> :Files<CR>
 nnoremap <c-f> :Ag<CR>
