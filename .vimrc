@@ -91,7 +91,7 @@ set wildmenu
 " - Use Ctrl-] to jump to tag under cursor
 " - Use g-Ctrl-] for ambiguous tags
 " - Use Ctrl-t to jump back up the tag stack
-command! MakeTags !ctags -R .
+"command! MakeTags !ctags -R .
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocompelete					      			"
@@ -137,7 +137,7 @@ let g:airline_theme='gruvbox'
 colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
-let g:coc_global_extensions = ['coc-json', 'coc-xml', 'coc-yaml', 'coc-markdownlint', 'coc-clangd', 'coc-cmake', 'coc-java', 'coc-python', 'coc-sh', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-html-css-support', 'coc-vimlsp']
+let g:coc_global_extensions = ['coc-json', 'coc-markdownlint', 'coc-clangd', 'coc-cmake', 'coc-python', 'coc-sh', 'coc-vimlsp']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Remappings					                "
