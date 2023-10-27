@@ -143,11 +143,9 @@ colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
 let g:coc_global_extensions = [
-\    'coc-json',
 \    'coc-markdownlint',
 \    'coc-clangd',
 \    'coc-cmake',
-\    'coc-python',
 \    'coc-sh',
 \    'coc-vimlsp'
 \]
