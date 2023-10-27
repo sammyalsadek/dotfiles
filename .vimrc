@@ -68,11 +68,16 @@ set wrap "Wrap lines
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
-set updatetime=300
+set updatetime=50
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved
 set signcolumn=yes
+
+set undodir=~/.vim/undo-dir
+set undofile
+
+set colorcolumn=100
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Finding files					      			"
@@ -137,7 +142,15 @@ let g:airline_theme='gruvbox'
 colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
-let g:coc_global_extensions = ['coc-json', 'coc-markdownlint', 'coc-clangd', 'coc-cmake', 'coc-python', 'coc-sh', 'coc-vimlsp']
+let g:coc_global_extensions = [
+\    'coc-json',
+\    'coc-markdownlint',
+\    'coc-clangd',
+\    'coc-cmake',
+\    'coc-python',
+\    'coc-sh',
+\    'coc-vimlsp'
+\]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Remappings					                "
@@ -154,6 +167,8 @@ nnoremap M Mzz
 nnoremap L Lzz
 nnoremap gg ggzz
 nnoremap G Gzz
+nnoremap n nzzzv
+nnoremap N Nzzzv
 vnoremap j jzz
 vnoremap k kzz
 vnoremap { {zz
@@ -165,6 +180,19 @@ vnoremap M Mzz
 vnoremap L Lzz
 vnoremap gg ggzz
 vnoremap G Gzz
+
+" Move highlighed text around
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Only using control rather than ESC key
+inoremap <c-c> <Esc>
+
+" Destroy Q action
+nnoremap Q <nop>
+
+" Turn off search highlights until the next search
+nnoremap <c-n> :noh<CR>
 
 " GoTo code navigation
 nnoremap <silent> gd <Plug>(coc-definition)
