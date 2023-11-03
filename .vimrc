@@ -129,7 +129,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.vim/bundle')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
@@ -139,8 +138,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'bfrg/vim-cpp-modern'
 call plug#end()
 
-let g:airline_theme='gruvbox'
+let g:airline_theme='apprentice'
 colorscheme habamax
+hi Normal guibg=NONE ctermbg=NONE
 
 let g:coc_global_extensions = [
 \    'coc-spell-checker',
