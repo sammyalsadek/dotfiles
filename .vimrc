@@ -136,13 +136,14 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'bfrg/vim-cpp-modern'
 call plug#end()
 
 let g:airline_theme='gruvbox'
-colorscheme gruvbox
-hi Normal guibg=NONE ctermbg=NONE
+colorscheme habamax
 
 let g:coc_global_extensions = [
+\    'coc-spell-checker',
 \    'coc-markdownlint',
 \    'coc-clangd',
 \    'coc-cmake',
@@ -191,6 +192,11 @@ nnoremap Q <nop>
 
 " Turn off search highlights until the next search
 nnoremap <c-n> :noh<CR>
+
+" Error navigation and handling
+nnoremap <silent> ga <Plug>(coc-codeaction-cursor)
+nnoremap <silent> gn <Plug>(coc-diagnostic-next)
+nnoremap <silent> gp <Plug>(coc-diagnostic-prev)
 
 " GoTo code navigation
 nnoremap <silent> gd <Plug>(coc-definition)
