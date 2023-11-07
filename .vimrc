@@ -99,7 +99,7 @@ set wildmenu
 "command! MakeTags !ctags -R .
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Autocompelete					      			"
+" Autocomplete					      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " The good stuff is documented in |ins-completion|
 "
