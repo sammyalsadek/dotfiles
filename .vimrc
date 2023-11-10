@@ -132,24 +132,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'bfrg/vim-cpp-modern'
 call plug#end()
 
 let g:airline_theme='apprentice'
 colorscheme habamax
 hi Normal guibg=NONE ctermbg=NONE
-
-let g:coc_global_extensions = [
-\    'coc-spell-checker',
-\    'coc-markdownlint',
-\    'coc-clangd',
-\    'coc-cmake',
-\    'coc-sh',
-\    'coc-vimlsp'
-\]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Remappings					                "
@@ -180,10 +167,6 @@ vnoremap L Lzz
 vnoremap gg ggzz
 vnoremap G Gzz
 
-" Move highlighed text around
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
 " Only using control rather than ESC key
 inoremap <c-c> <Esc>
 
@@ -192,33 +175,3 @@ nnoremap Q <nop>
 
 " Turn off search highlights until the next search
 nnoremap <c-n> :noh<CR>
-
-" Error navigation and handling
-nnoremap <silent> ga <Plug>(coc-codeaction-cursor)
-nnoremap <silent> gn <Plug>(coc-diagnostic-next)
-nnoremap <silent> gp <Plug>(coc-diagnostic-prev)
-
-" GoTo code navigation
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gt <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-nnoremap <silent> gb <c-t>
-nnoremap <silent> gh :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Fuzzy finding files and text
-nnoremap <c-p> :Files<CR>
-nnoremap <c-f> :Ag<CR>
