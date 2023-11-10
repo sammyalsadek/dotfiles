@@ -48,6 +48,12 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     # sending messages and opening windows for replies.
     defaults write com.apple.Mail DisableSendAnimation -bool true
     defaults write com.apple.Mail DisableReplyAnimations -bool true
+    # VSCode configurations for key repeats.
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false              # For VS Code
+    defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false      # For VS Code Insider
+    defaults write com.vscodium ApplePressAndHoldEnabled -bool false                      # For VS Codium
+    defaults write com.microsoft.VSCodeExploration ApplePressAndHoldEnabled -bool false   # For VS Codium Exploration users
+    defaults delete -g ApplePressAndHoldEnabled                                           # If necessary, reset global default
     killall Dock
 
     # Install yabai windows manager
