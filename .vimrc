@@ -118,20 +118,22 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
 call plug#end()
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
-    nmap <buffer> <c-]> <plug>(lsp-definition)
-    nmap <buffer> gd <plug>(lsp-declaration)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gh <plug>(lsp-hover)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nnoremap <buffer> <c-]> <plug>(lsp-definition)
+    nnoremap <buffer> gd <plug>(lsp-declaration)
+    nnoremap <buffer> gr <plug>(lsp-references)
+    nnoremap <buffer> gh <plug>(lsp-hover)
+    nnoremap <buffer> gi <plug>(lsp-implementation)
+    nnoremap <buffer> gt <plug>(lsp-type-definition)
+    nnoremap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nnoremap <buffer> ]g <plug>(lsp-next-diagnostic)
 endfunction
 
 augroup lsp_install
