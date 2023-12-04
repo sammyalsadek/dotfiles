@@ -63,7 +63,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     yabai --start-service
 fi
 
-brew install cmake python node nvm java vim
+brew install make cmake python node nvm java vim llvm screen
 sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 mkdir ~/.nvm
 export NVM_DIR="$HOME/.nvm"
