@@ -1,15 +1,26 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings				      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on
+
 " Tell vim to not try to be vi
 set nocompatible
+
+" Show the syntax
+syntax on
 
 " Show relative number column along with the current line number
 set number
 set relativenumber
 
-" Hide mode identifier (Pluggin installed to replace)
+" Hide mode identifier (Plugin installed to replace)
 set noshowmode
+
+" Highlights the line where the cursor is
+set cursorline
+
+" Adds spell checking
+set spell
 
 " Editor theme
 set background=dark
@@ -47,7 +58,7 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-" Set utf8 as standard encoding and en_US as the standard language
+" Set UTF-8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
 " Use Unix as the standard file type
@@ -58,59 +69,33 @@ set nobackup
 set nowb
 set noswapfile
 
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
 
-" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" Having longer update time (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
 set updatetime=50
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved
-set signcolumn=yes
 
 set undodir=~/.vim/undo-dir
 set undofile
 
 set colorcolumn=100
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Finding files					      			"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Search down into subfolders
-" Provides tab-completion for all file-related tasks
-" - set path+=**
+" Keep cursor in the center where remaps to not cover
+set scrolloff=100
 
 " Display all matching files when we tab complete
 set wildmenu
+set wildignore=*.exe,*.dll,*.pdb
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tag jumping					      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Create the 'tags' file (may need to install ctags first)i
+" Create the 'tags' file (may need to install ctags first)
 " - Use Ctrl-] to jump to tag under cursor
 " - Use g-Ctrl-] for ambiguous tags
 " - Use Ctrl-t to jump back up the tag stack
 "command! MakeTags !ctags -R .
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Autocomplete					      			"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" The good stuff is documented in |ins-completion|
-"
-" Highlights
-" - Ctrl-x Ctrl-n for JUST this file
-" - Ctrl-x Ctrl-f for filenames (works with our path trick)
-" - Ctrl-x Ctrl-] for tags only
-" - Ctrl-n for anything specific by the 'complete' option
-"
-" Now we can
-" - Use Ctrl-n and Ctrl-p to go back and forth in the suggestion list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                               "
@@ -132,14 +117,30 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 call plug#end()
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nmap <buffer> <c-]> <plug>(lsp-definition)
+    nmap <buffer> gd <plug>(lsp-declaration)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gh <plug>(lsp-hover)
+endfunction
+
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 let g:airline_theme='apprentice'
 colorscheme habamax
 hi Normal guibg=NONE ctermbg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom Remappings					                "
+" Custom Re-mappings					                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keep the cursor in the center of the screen
 nnoremap j jzz
@@ -148,9 +149,6 @@ nnoremap { {zz
 nnoremap } }zz
 nnoremap <c-u> <c-u>zz
 nnoremap <c-d> <c-d>zz
-nnoremap H Hzz
-nnoremap M Mzz
-nnoremap L Lzz
 nnoremap gg ggzz
 nnoremap G Gzz
 nnoremap n nzzzv
@@ -161,11 +159,11 @@ vnoremap { {zz
 vnoremap } }zz
 vnoremap <c-u> <c-u>zz
 vnoremap <c-d> <c-d>zz
-vnoremap H Hzz
-vnoremap M Mzz
-vnoremap L Lzz
 vnoremap gg ggzz
 vnoremap G Gzz
+
+" Add new line
+nnoremap L i<CR><c-c>h
 
 " Only using control rather than ESC key
 inoremap <c-c> <Esc>
