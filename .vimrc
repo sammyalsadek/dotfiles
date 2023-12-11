@@ -103,6 +103,7 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> gh <plug>(lsp-hover)
     nnoremap <buffer> gi <plug>(lsp-implementation)
     nnoremap <buffer> gt <plug>(lsp-type-definition)
+    nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
     nnoremap <buffer> [g <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> ]g <plug>(lsp-next-diagnostic)
 endfunction
@@ -111,6 +112,9 @@ augroup lsp_install
     au!
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+let g:lsp_diagnostics_virtual_text_enabled=0
+let g:lsp_diagnostics_float_cursor=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Re-mappings				                	                "
