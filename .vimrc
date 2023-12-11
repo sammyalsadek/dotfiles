@@ -15,7 +15,7 @@ colorscheme retrobox
 set background=dark
 set number
 set cursorline
-set colorcolumn=100
+set colorcolumn=80
 set scrolloff=20
 
 " Adds spell checking
