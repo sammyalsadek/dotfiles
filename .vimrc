@@ -17,9 +17,7 @@ set number
 set cursorline
 set colorcolumn=80
 set scrolloff=20
-
-" Adds spell checking
-" set spell
+set laststatus=2
 
 " Set tabs to be 4 spaces
 set tabstop=4 softtabstop=0
@@ -51,6 +49,7 @@ set noswapfile
 " delays and poor user experience
 set updatetime=50
 
+" Enable persistent undo's
 set undodir=~/.vim/undo-dir
 set undofile
 
@@ -61,6 +60,12 @@ set wildignore=*.exe,*.dll,*.pdb
 " Searching
 set path+=**
 set gp=git\ grep\ -n
+
+" Netrw
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+let g:netrw_browse_split=4
+let g:netrw_winsize=20
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tag jumping	                        				      			"
@@ -104,8 +109,8 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> gi <plug>(lsp-implementation)
     nnoremap <buffer> gt <plug>(lsp-type-definition)
     nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
-    nnoremap <buffer> [g <plug>(lsp-previous-diagnostic)
-    nnoremap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nnoremap <buffer> gp <plug>(lsp-previous-diagnostic)
+    nnoremap <buffer> gn <plug>(lsp-next-diagnostic)
 endfunction
 
 augroup lsp_install
