@@ -59,19 +59,9 @@ set wildignore=*.exe,*.dll,*.pdb
 
 " Searching
 set path+=**
-set gp=git\ grep\ -n
 
 " Netrw
 let g:netrw_liststyle=3
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tag jumping	                        				      			"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Create the 'tags' file (may need to install ctags first)
-" - Use Ctrl-] to jump to tag under cursor
-" - Use g-Ctrl-] for ambiguous tags
-" - Use Ctrl-t to jump back up the tag stack
-"command! MakeTags !ctags -R .
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                               "
@@ -88,8 +78,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -99,6 +87,7 @@ call plug#end()
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
+
     nnoremap <buffer> <c-]> <plug>(lsp-definition)
     nnoremap <buffer> gd <plug>(lsp-declaration)
     nnoremap <buffer> gr <plug>(lsp-references)
@@ -108,6 +97,9 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
     nnoremap <buffer> gp <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> gn <plug>(lsp-next-diagnostic)
+
+    let g:lsp_diagnostics_virtual_text_enabled=0
+    let g:lsp_diagnostics_float_cursor=1
 endfunction
 
 augroup lsp_install
@@ -115,20 +107,11 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-let g:lsp_diagnostics_virtual_text_enabled=0
-let g:lsp_diagnostics_float_cursor=1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Re-mappings				                	                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Add new line
-nnoremap L i<CR><c-c>h
-
 " Only using control rather than ESC key
 inoremap <c-c> <Esc>
 
 " Destroy Q action
 nnoremap Q <nop>
-
-" Turn off search highlights until the next search
-nnoremap <c-n> :noh<CR>
