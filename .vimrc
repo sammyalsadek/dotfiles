@@ -49,21 +49,33 @@ set noswapfile
 " delays and poor user experience
 set updatetime=50
 
-" Enable persistent undo's
-set undodir=~/.vim/undo-dir
-set undofile
-
-" Display all matching files when we tab complete
+" Searching for files and text
 set wildmenu
 set wildignore=*/node_modules/*,*/build/*,*/dist/*
-
-" Searching
 set path+=**
 let &grepprg='grep -n -R --ignore-case
             \ --exclude-dir={node_modules,build,dist} $*'
 command! -nargs=+ Grep execute 'silent grep! <args>' | redraw! | copen
 cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() =~# '^grep') ?
             \ 'Grep' : 'grep'
+
+" Enable persistent undo's
+set undodir=~/.vim/undo-dir
+set undofile
+
+" Create vim sessions
+fu! SaveSess()
+    execute 'mksession! ' . getcwd() . '/.session.vim'
+endfunction
+
+fu! RestoreSess()
+    if filereadable(getcwd() . '/.session.vim')
+        execute 'so ' . getcwd() . '/.session.vim'
+    endif
+endfunction
+
+autocmd VimLeave * call SaveSess()
+autocmd VimEnter * nested call RestoreSess()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                               "
