@@ -55,10 +55,11 @@ set undofile
 
 " Display all matching files when we tab complete
 set wildmenu
-set wildignore=*.exe,*.dll,*.pdb
+set wildignore=*/node_modules/*,*/build/*,*/dist/*
 
 " Searching
 set path+=**
+set grepprg=git\ grep\ --ignore-case\ -n
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                               "
