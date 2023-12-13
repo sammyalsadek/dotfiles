@@ -59,7 +59,8 @@ set wildignore=*/node_modules/*,*/build/*,*/dist/*
 
 " Searching
 set path+=**
-set grepprg=git\ grep\ --ignore-case\ -n
+let &grepprg='grep -n -R --ignore-case
+            \ --exclude-dir={node_modules,build,dist} $*'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                               "
