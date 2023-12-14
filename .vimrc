@@ -23,12 +23,20 @@ set laststatus=2
 set tabstop=4 softtabstop=0
 set shiftwidth=4 smarttab
 set expandtab
-set ai "Auto indent
-set si "Smart indent
+set autoindent
+set smartindent
 
 " Fixing backspace issue to delete character placed before insert mode
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
+
+" Show matching brackets when text indicator is over them
+set showmatch
+set mat=2
+
+" Having longer update time (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=50
 
 " In file text searching
 set ignorecase
@@ -36,32 +44,30 @@ set smartcase
 set hlsearch
 set incsearch
 
-" Show matching brackets when text indicator is over them
-set showmatch
-set mat=2 " How many tenths of a second to blink when matching brackets
+" Searching for files and text
+set wildmenu
+set wildignore=*/node_modules/*,*/build/*,*/dist/*
+set path+=**
+command! -nargs=+ Grep execute 'silent grep! <args>' | redraw! | copen
+cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() =~# '^grep') ?
+            \ 'Grep' : 'grep'
+let &grepprg='grep -n -R --ignore-case
+            \ --exclude-dir={node_modules,build,dist} $*'
+
+" Enable persistent undo's
+if has('persistent_undo')
+    let target_path = expand('~/.vim/undo/')
+    if !isdirectory(target_path)
+        call system('mkdir -p ' . target_path)
+    endif
+    let &undodir = target_path
+    set undofile
+endif
 
 " Turn backup off, since most stuff is in SVN, git etc. anyway...
 set nobackup
 set nowb
 set noswapfile
-
-" Having longer update time (default is 4000 ms = 4s) leads to noticeable
-" delays and poor user experience
-set updatetime=50
-
-" Searching for files and text
-set wildmenu
-set wildignore=*/node_modules/*,*/build/*,*/dist/*
-set path+=**
-let &grepprg='grep -n -R --ignore-case
-            \ --exclude-dir={node_modules,build,dist} $*'
-command! -nargs=+ Grep execute 'silent grep! <args>' | redraw! | copen
-cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() =~# '^grep') ?
-            \ 'Grep' : 'grep'
-
-" Enable persistent undo's
-set undodir=~/.vim/undo-dir
-set undofile
 
 " Create vim sessions
 fu! SaveSess()
@@ -109,9 +115,6 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> gi <plug>(lsp-implementation)
     nnoremap <buffer> gt <plug>(lsp-type-definition)
     nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
-    nnoremap <buffer> gp <plug>(lsp-previous-diagnostic)
-    nnoremap <buffer> gn <plug>(lsp-next-diagnostic)
-
     let g:lsp_diagnostics_virtual_text_enabled=0
     let g:lsp_diagnostics_float_cursor=1
 endfunction
