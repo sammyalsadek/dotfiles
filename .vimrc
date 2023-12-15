@@ -46,6 +46,7 @@ set incsearch
 
 " Searching for files and text
 set wildmenu
+set wildignorecase
 set wildignore=*/node_modules/*,*/build/*,*/dist/*
 set path+=**
 command! -nargs=+ Grep execute 'silent grep! <args>' | redraw! | copen
