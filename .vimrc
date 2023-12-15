@@ -108,7 +108,6 @@ call plug#end()
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
-
     nnoremap <buffer> <c-]> <plug>(lsp-definition)
     nnoremap <buffer> gd <plug>(lsp-declaration)
     nnoremap <buffer> gr <plug>(lsp-references)
