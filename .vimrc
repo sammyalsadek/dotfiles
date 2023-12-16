@@ -18,6 +18,7 @@ set cursorline
 set colorcolumn=80
 set scrolloff=20
 set laststatus=2
+set nofoldenable
 
 " Set tabs to be 4 spaces
 set tabstop=4 softtabstop=0
