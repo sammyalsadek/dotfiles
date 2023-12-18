@@ -65,15 +65,15 @@ set hlsearch
 
 " Global file searching
 set wildignorecase
-set wildignore=*/node_modules/*,*/build/*,*/dist/*
+set wildignore=*/node_modules/*,*/build/*,*/dist/*,*/env/*
 set path+=**
 
 " Global text searching
 command! -nargs=+ Grep execute 'silent grep! <args>' | redraw! | copen
 cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() =~# '^grep')
             \ ? 'Grep' : 'grep'
-let &grepprg='grep -nR --ignore-case --exclude-dir={node_modules,build,dist}
-            \ $*'
+let &grepprg='grep -nR --exclude-dir={node_modules,build,dist,env}
+            \ --ignore-case $*'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Re-mappings				                        "
