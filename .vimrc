@@ -78,6 +78,10 @@ let &grepprg='grep -nR --exclude-dir={node_modules,build,dist,env}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Re-mappings				                        "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Moving around buffers
+nnoremap <c-n> :bn<cr>
+nnoremap <c-p> :bp<cr>
+
 " Only using control rather than ESC key
 inoremap <c-c> <Esc>
 
