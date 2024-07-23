@@ -1,11 +1,10 @@
 -- Styling
-vim.cmd.colorscheme("desert")
 vim.opt.number=true
 vim.opt.cursorline=true
-vim.opt.cursorcolumn=true
 vim.opt.colorcolumn="80"
 vim.opt.scrolloff=20
 vim.opt.foldenable=false
+vim.opt.signcolumn="yes"
 
 -- In file text searching
 vim.opt.ignorecase=true
