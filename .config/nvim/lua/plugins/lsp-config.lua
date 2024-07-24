@@ -27,7 +27,6 @@ return {
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
         local default_capabilities = vim.lsp.protocol.make_client_capabilities()
-        lo
         default_capabilities = vim.tbl_deep_extend(
             "force",
             default_capabilities,
