@@ -16,15 +16,6 @@ return {
         },
         -- optional `vim.uv` typings for lazydev
         { "Bilal2453/luvit-meta", lazy = true },
-        "mfussenegger/nvim-jdtls",
-        {
-            url = "awsammy@git.amazon.com:pkg/NinjaHooks",
-            branch = "mainline",
-            lazy = false,
-            config = function(plugin)
-                vim.opt.rtp:prepend(plugin.dir .. "/configuration/vim/amazon/brazil-config")
-            end,
-        },
         "hrsh7th/cmp-nvim-lsp",
     },
 
@@ -33,30 +24,10 @@ return {
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
         local mason_tool_installer = require("mason-tool-installer")
-        local configs = require("lspconfig.configs")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-        vim.filetype.add({
-            filename = {
-                ['Config'] = function()
-                    vim.b.brazil_package_Config = 1
-                    return 'brazil-config'
-                end,
-            },
-        })
-        configs.barium = {
-            default_config = {
-                cmd = {'barium'};
-                filetypes = {'brazil-config'};
-                root_dir = function(fname)
-                    return lspconfig.util.find_git_ancestor(fname)
-                end;
-                settings = {};
-            };
-        }
-        lspconfig.barium.setup({})
-
         local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+        lo
         default_capabilities = vim.tbl_deep_extend(
             "force",
             default_capabilities,
@@ -88,7 +59,6 @@ return {
             mason_ensure_installed,
             {
                 "stylua",
-                "jdtls",
             }
         )
         mason_tool_installer.setup({
@@ -105,8 +75,7 @@ return {
                         server_config.capabilities or {}
                     )
                     lspconfig[server_name].setup(server_config)
-                end,
-                ['jdtls'] = function() end,
+                end
             },
         })
 
