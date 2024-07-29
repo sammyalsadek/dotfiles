@@ -10,3 +10,6 @@ vim.opt.showmode=false
 -- In file text searching
 vim.opt.ignorecase=true
 vim.opt.smartcase=true
+
+-- Netrw styling
+vim.g.netrw_liststyle=3
