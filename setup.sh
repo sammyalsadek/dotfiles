@@ -25,7 +25,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     yabai --start-service
 fi
 
-brew install screen vim nvim llvm make cmake python java node nvm rg
+brew install screen vim nvim llvm make cmake python java node nvm rg fd
 
 sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 

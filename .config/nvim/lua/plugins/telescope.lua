@@ -6,14 +6,34 @@ return {
     },
 
     config = function()
-        local keymap = function(keys, func)
-            vim.keymap.set("n", keys, func, {})
-        end
+        require("telescope").setup({
+            defaults = {
+                file_ignore_patterns = {
+                    "node%_modules/.*",
+                    "build/.*",
+                    "dist/.*",
+                    "env/.*",
+                },
+                vimgrep_arguments = {
+                    'rg',
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--smart-case",
+                    '--no-ignore'
+                }
+            },
+        })
 
-        require("telescope").setup({})
         local builtin = require("telescope.builtin")
 
-        keymap("<c-f>", builtin.find_files)
-        keymap("<c-g>", builtin.live_grep)
+        vim.keymap.set("n", "<c-f>", function()
+            builtin.find_files({ no_ignore_parent = true })
+        end)
+        vim.keymap.set("n", "<c-g>", function()
+            builtin.live_grep()
+        end)
     end
 }
