@@ -29,6 +29,8 @@ brew install screen vim nvim llvm make cmake python java node nvm
 
 sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 
+git config --global core.editor /home/linuxbrew/.linuxbrew/bin/nvim
+
 mkdir ~/.nvm
 export NVM_DIR="$HOME/.nvm"
     [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
