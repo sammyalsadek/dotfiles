@@ -29,3 +29,7 @@ git checkout -f main
 5. In order to track a new dot file and override the .gitignore configuration, run the following command:
 
 `git add -f <filename>`
+
+6. Update the zsh theme in .zshrc file.
+
+`ZSH_THEME="af-magic"`

@@ -13,6 +13,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
             \ | endif
 
 call plug#begin($HOME . '/.vim/bundle')
+Plug 'sainnhe/everforest'
+Plug 'vim-airline/vim-airline'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
@@ -20,6 +22,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 function! s:on_lsp_buffer_enabled() abort
@@ -45,18 +48,23 @@ let g:workspace_autocreate=1
 let g:workspace_create_new_tabs=0
 let g:workspace_session_directory=$HOME . '/.vim/sessions/'
 let g:workspace_undodir=$HOME . '/.vim/undodir/'
+let g:workspace_nocompatible=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings				      			"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Styling
-colorscheme retrobox
+colorscheme everforest
 set background=dark
 set number
 set cursorline
 set colorcolumn=80
 set scrolloff=20
 set nofoldenable
+set noshowmode
+
+" Netrw styling
+let g:netrw_liststyle=3
 
 " In file text searching
 set ignorecase
