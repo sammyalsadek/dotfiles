@@ -76,10 +76,11 @@ set wildignorecase
 set wildignore=*/node_modules/*,*/build/*,*/dist/*,*/env/*
 set path+=**
 
+" SSH compatibility
+set mouse=i
+
 " Global text searching
 command! -nargs=+ Grep execute 'silent grep! <args>' | redraw! | copen
-cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() =~# '^grep')
-            \ ? 'Grep' : 'grep'
 let &grepprg='grep -nR --exclude-dir={node_modules,build,dist,env}
             \ --ignore-case $*'
 
@@ -89,6 +90,9 @@ let &grepprg='grep -nR --exclude-dir={node_modules,build,dist,env}
 " Moving around buffers
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
+
+" Global text searching
+nnoremap <c-g> :Grep<space>
 
 " Only using control rather than ESC key
 inoremap <c-c> <Esc>

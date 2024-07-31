@@ -13,3 +13,9 @@ vim.opt.smartcase=true
 
 -- Netrw styling
 vim.g.netrw_liststyle=3
+
+-- SSH compatibility
+vim.opt.mouse="i"
+
+-- Global text searching
+vim.o.grepprg=[[grep -nR --exclude-dir={node_modules,build,dist,env} --ignore-case $* | redraw | copen]]
