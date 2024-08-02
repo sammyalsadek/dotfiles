@@ -1,8 +1,8 @@
 return {
     {
-        'kien/ctrlp.vim',
+        'ctrlpvim/ctrlp.vim',
         init = function()
-            vim.keymap.set("n", "<c-f>", ":CtrlP<cr>")
+            vim.keymap.set("n", "<c-f>", ":CtrlP :pwd<cr>")
         end
     },
 }
