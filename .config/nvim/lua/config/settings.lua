@@ -17,5 +17,7 @@ vim.g.netrw_liststyle=3
 -- SSH compatibility
 vim.opt.mouse="i"
 
--- Global text searching
+-- Global file and text searching
+vim.opt.wildignorecase=true
+vim.opt.wildignore="*/node_modules/*,*/build/*,*/dist/*,*/env/*"
 vim.o.grepprg=[[grep -nR --exclude-dir={node_modules,build,dist,env} --ignore-case $* | redraw | copen]]

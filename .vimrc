@@ -18,6 +18,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
+Plug 'kien/ctrlp.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -49,6 +50,8 @@ let g:workspace_create_new_tabs=0
 let g:workspace_session_directory=$HOME . '/.vim/sessions/'
 let g:workspace_undodir=$HOME . '/.vim/undodir/'
 let g:workspace_nocompatible=0
+let g:ctrlp_map = '<c-f>'
+let g:ctrlp_cmd = 'CtrlP'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings				      			"
@@ -74,7 +77,6 @@ set hlsearch
 " Global file searching
 set wildignorecase
 set wildignore=*/node_modules/*,*/build/*,*/dist/*,*/env/*
-set path+=**
 
 " SSH compatibility
 set mouse=i
