@@ -50,8 +50,9 @@ let g:workspace_create_new_tabs=0
 let g:workspace_session_directory=$HOME . '/.vim/sessions/'
 let g:workspace_undodir=$HOME . '/.vim/undodir/'
 let g:workspace_nocompatible=0
-let g:ctrlp_map = '<c-f>'
-let g:ctrlp_cmd = 'CtrlP :pwd'
+let g:ctrlp_map='<c-f>'
+let g:ctrlp_cmd='CtrlP :pwd'
+let g:ctrlp_by_filename=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings				      			"
