@@ -16,15 +16,20 @@ git checkout -f main
 - https://ohmyz.sh/
 - Update the theme in the .zshrc file to `ZSH_THEME="af-magic"`
 
-3. Install Homebrew
+3. Install Homebrew (Package manager)
 - https://brew.sh/
 
-4. Install Yabai
+4. Install Yabai (Tiling windows manager)
 - https://github.com/koekeishiya/yabai
+- Go to system preferences -> accessibility -> display -> turn on reduce motion.
+- Open new desktops -> go to system preferences -> keyboard -> keyboard shortcuts -> mission control -> enable mission control -> add shortcuts for desktop switching by cmd + number.
+- Assign apps to a desktop through the application right click options in the dock.
 
-5. Install FlyCut
+5. Install FlyCut (Clipboard manager)
 - https://formulae.brew.sh/cask/flycut#default
 
 6. Swap the Caps key with Ctrl
-- Go to system preferences -> keyboard -> keyboard shortcut -> modifier keys, and swap Ctrl and Caps.
+- Go to system preferences -> keyboard -> keyboard shortcut -> modifier keys -> swap Ctrl and Caps.
 
+7. Adjust key repeat rate and delay unit repeat
+- Go to system preferences -> keyboard -> adjust key repeat rate and delay unit repeat.
