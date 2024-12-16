@@ -2,13 +2,7 @@
 The purpose of this repository is to store all of my dotfiles, and instructions on setting up a new machine.
 
 ## Steps for setting up a new machine.
-1. If you are using mac do the following:
-- Go to the system preferences -> accessibility and turn on reduce motion.
-- Open a few new desktops and go to system preferences -> keyboard -> keyboard shortcut, and enable mission control desktop switching by number.
-- Go to system preferences -> keyboard -> keyboard shortcut -> modifier keys, and swap Ctrl and CAPS.
-- Assign apps to a desktop through the dock options menu.
-
-2. Pull the dotfiles repository by using the following commands.
+1. Pull the dotfiles repository by using the following commands.
 
 ```
 cd ~
@@ -18,18 +12,19 @@ git fetch
 git checkout -f main
 ```
 
-3. After pulling the repository, run the setup.sh script.
+2. Install Oh-My-Zsh
+- https://ohmyz.sh/
+- Update the theme in the .zshrc file to `ZSH_THEME="af-magic"`
 
-`zsh setup.sh`
+3. Install Homebrew
+- https://brew.sh/
 
-4. After the script completes and access is given to yabai run the following command.
+4. Install Yabai
+- https://github.com/koekeishiya/yabai
 
-`yabai --restart-service`
+5. Install FlyCut
+- https://formulae.brew.sh/cask/flycut#default
 
-5. In order to track a new dot file and override the .gitignore configuration, run the following command:
+6. Swap the Caps key with Ctrl
+- Go to system preferences -> keyboard -> keyboard shortcut -> modifier keys, and swap Ctrl and Caps.
 
-`git add -f <filename>`
-
-6. Update the zsh theme in .zshrc file.
-
-`ZSH_THEME="af-magic"`

@@ -29,13 +29,8 @@ function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nnoremap <buffer> <c-]> <plug>(lsp-definition)
     nnoremap <buffer> K <plug>(lsp-hover)
-    nnoremap <buffer> gr <plug>(lsp-references)
     nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
-    nnoremap <buffer> gd <plug>(lsp-declaration)
-    nnoremap <buffer> gi <plug>(lsp-implementation)
-    nnoremap <buffer> gt <plug>(lsp-type-definition)
-    nnoremap <buffer> <expr><c-k> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-j> lsp#scroll(-4)
+    nnoremap <buffer> gr <plug>(lsp-references)
     let g:lsp_diagnostics_virtual_text_enabled=0
 endfunction
 
