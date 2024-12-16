@@ -26,15 +26,17 @@ call plug#end()
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nnoremap <buffer> <c-]> <plug>(lsp-definition)
-    nnoremap <buffer> gd <plug>(lsp-declaration)
+    nnoremap <buffer> K <plug>(lsp-hover)
     nnoremap <buffer> gr <plug>(lsp-references)
-    nnoremap <buffer> gh <plug>(lsp-hover)
+    nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
+    nnoremap <buffer> gd <plug>(lsp-declaration)
     nnoremap <buffer> gi <plug>(lsp-implementation)
     nnoremap <buffer> gt <plug>(lsp-type-definition)
-    nnoremap <buffer> gl <plug>(lsp-document-diagnostics)
+    nnoremap <buffer> <expr><c-k> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-j> lsp#scroll(-4)
     let g:lsp_diagnostics_virtual_text_enabled=0
-    let g:lsp_diagnostics_float_cursor=1
 endfunction
 
 augroup lsp_install
