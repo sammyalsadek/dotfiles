@@ -30,6 +30,3 @@ git checkout -f main
 
 6. Swap the Caps key with Ctrl
 - Go to system preferences -> keyboard -> keyboard shortcut -> modifier keys -> swap Ctrl and Caps.
-
-7. Adjust key repeat rate and delay unit repeat
-- Go to system preferences -> keyboard -> adjust key repeat rate and delay unit repeat.

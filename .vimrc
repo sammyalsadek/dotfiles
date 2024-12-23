@@ -2,17 +2,22 @@
 " Plugins                                                               "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Install vim-plug if not found
-if empty(glob($HOME . "/.vim/autoload/plug.vim"))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let data_dir = $HOME . "/.vim/autoload/plug.vim"
+if empty(glob(data_dir))
+    silent execute "!curl -fLo " . data_dir . " --create-dirs "
+                \ . "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 endif
 
 " Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), "!isdirectory(v:val.dir)"))
-            \ | PlugInstall --sync | source $MYVIMRC
-            \ | endif
+let g:plug_dir = $HOME . "/.vim/bundle"
+augroup plug_install
+    autocmd!
+    autocmd VimEnter * if len(filter(values(g:plugs), "!isdirectory(v:val.dir)"))
+                \| PlugInstall --sync | source $MYVIMRC
+                \| endif
+augroup END
 
-call plug#begin($HOME . "/.vim/bundle")
+call plug#begin(g:plug_dir)
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'thaerkh/vim-workspace'
@@ -52,13 +57,50 @@ set wildignorecase
 set wildignore=*/node_modules/*,*/build/*,*/dist/*,*/env/*,*/.bemol/*,*/.git/*
 
 " Global text searching
-command! -nargs=+ Grep execute "silent grep! <args>" | redraw! | copen
-let &grepprg="grep -nR --exclude-dir={node_modules,build,dist,env,.bemol,.git}
-            \ --exclude=tags
-            \ --ignore-case $*"
+command! -nargs=+ Grep call AsyncGrep(<q-args>)
+
+function! AsyncGrep(query)
+    cclose
+    call setqflist([])
+    let cmd = ['grep', '-nR', '--ignore-case', '--exclude=tags']
+    let exclude_dirs = ['node_modules', 'build', 'dist', 'env', '.bemol', '.git']
+    for dir in exclude_dirs
+        call extend(cmd, ['--exclude-dir', dir])
+    endfor
+    call extend(cmd, [a:query])
+    call job_start(cmd, {
+                \ 'out_io': 'pipe',
+                \ 'err_io': 'pipe',
+                \ 'out_cb': 'AsyncGrepCallback',
+                \ 'close_cb': 'AsyncGrepDone'
+                \ })
+    echomsg "Searching..."
+
+    function! AsyncGrepCallback(channel, msg)
+        caddexpr a:msg
+    endfunction
+
+    function! AsyncGrepDone(channel)
+        echomsg "Search complete!"
+        copen
+    endfunction
+endfunction
 
 " Autocompletion and jumping with ctags
-if eval("@%") == ''
+augroup ctags_gen
+    autocmd!
+    autocmd VimEnter * call GenerateCtags()
+augroup END
+
+function! GenerateCtags()
+    if empty(eval("@%"))
+        if filereadable('tags') || confirm("No tags file found. Generate it?", "&Yes\n&No", 1) == 1
+            call job_start(['ctags', '-R', '.'], {'exit_cb': 'CtagsCallback'})
+        else
+            echomsg "Tags file creation aborted."
+        endif
+    endif
+
     function! CtagsCallback(channel, exit_status)
         if a:exit_status == 0
             echomsg "Tags file generated successfully!"
@@ -68,18 +110,7 @@ if eval("@%") == ''
             echohl None
         endif
     endfunction
-
-    if filereadable('tags')
-        au VimEnter * call job_start(['ctags', '-R', '.'], {'exit_cb': 'CtagsCallback'})
-    else
-        let choice = confirm("No tags file found. Do you want to generate it using ctags?", "&Yes\n&No", 1)
-        if choice == 1
-            au VimEnter * call job_start(['ctags', '-R', '.'], {'exit_cb': 'CtagsCallback'})
-        else
-            echomsg "Tags file creation aborted."
-        endif
-    endif
-endif
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Re-mappings				                        "
