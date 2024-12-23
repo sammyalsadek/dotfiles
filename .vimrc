@@ -62,17 +62,17 @@ command! -nargs=+ Grep call AsyncGrep(<q-args>)
 function! AsyncGrep(query)
     cclose
     call setqflist([])
-    let cmd = ['grep', '-nR', '--ignore-case', '--exclude=tags']
-    let exclude_dirs = ['node_modules', 'build', 'dist', 'env', '.bemol', '.git']
+    let cmd = ["grep", "-nR", "--ignore-case", "--exclude=tags"]
+    let exclude_dirs = ["node_modules", "build", "dist", "env", ".bemol", ".git"]
     for dir in exclude_dirs
-        call extend(cmd, ['--exclude-dir', dir])
+        call extend(cmd, ["--exclude-dir", dir])
     endfor
     call extend(cmd, [a:query])
     call job_start(cmd, {
-                \ 'out_io': 'pipe',
-                \ 'err_io': 'pipe',
-                \ 'out_cb': 'AsyncGrepCallback',
-                \ 'close_cb': 'AsyncGrepDone'
+                \ "out_io": "pipe",
+                \ "err_io": "pipe",
+                \ "out_cb": "AsyncGrepCallback",
+                \ "close_cb": "AsyncGrepDone"
                 \ })
     echomsg "Searching..."
 
@@ -94,8 +94,8 @@ augroup END
 
 function! GenerateCtags()
     if empty(eval("@%"))
-        if filereadable('tags') || confirm("No tags file found. Generate it?", "&Yes\n&No", 1) == 1
-            call job_start(['ctags', '-R', '.'], {'exit_cb': 'CtagsCallback'})
+        if filereadable("tags") || confirm("No tags file found. Generate it?", "&Yes\n&No", 1) == 1
+            call job_start(["ctags", "-R", "."], {"exit_cb": "CtagsCallback"})
         else
             echomsg "Tags file creation aborted."
         endif
