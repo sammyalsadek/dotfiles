@@ -59,7 +59,26 @@ let &grepprg="grep -nR --exclude-dir={node_modules,build,dist,env,.bemol,.git}
 
 " Autocompletion and jumping with ctags
 if eval("@%") == ''
-    au VimEnter * silent !ctags -R .
+    function! CtagsCallback(channel, exit_status)
+        if a:exit_status == 0
+            echomsg "Tags file generated successfully!"
+        else
+            echohl ErrorMsg
+            echomsg "Failed to generate tags file"
+            echohl None
+        endif
+    endfunction
+
+    if filereadable('tags')
+        au VimEnter * call job_start(['ctags', '-R', '.'], {'exit_cb': 'CtagsCallback'})
+    else
+        let choice = confirm("No tags file found. Do you want to generate it using ctags?", "&Yes\n&No", 1)
+        if choice == 1
+            au VimEnter * call job_start(['ctags', '-R', '.'], {'exit_cb': 'CtagsCallback'})
+        else
+            echomsg "Tags file creation aborted."
+        endif
+    endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
