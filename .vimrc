@@ -35,6 +35,7 @@ let g:workspace_undodir=$HOME . "/.vim/undodir/"
 colorscheme retrobox
 set background=dark
 set number
+set relativenumber
 set cursorline
 set colorcolumn=80
 set scrolloff=20
