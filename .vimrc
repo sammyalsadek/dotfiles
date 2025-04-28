@@ -34,6 +34,9 @@ let g:workspace_undodir=$HOME . "/.vim/undodir/"
 " Global variables
 let g:exclude_dirs = ["node_modules", "build", "dist", "env", ".bemol", ".git"]
 
+" Default
+set noswapfile
+
 " Styling
 colorscheme retrobox
 set background=dark
