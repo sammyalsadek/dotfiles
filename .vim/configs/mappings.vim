@@ -3,7 +3,7 @@ nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 
 " Global file searching
-nnoremap <c-f> :find<space>*
+let g:ctrlp_map = "<c-f>"
 
 " Global text searching
 nnoremap <c-g> :Grep<space>
