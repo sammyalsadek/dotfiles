@@ -1,3 +1,3 @@
 set path+=**
 set wildignorecase
-set wildignore=*/node_modules/*,*/build/*,*/dist/*,*/env/*,*/.bemol/*,*/.git/*
+let &wildignore = join(map(copy(g:exclude_dirs), '"*/" . v:val . "/*,*/" . v:val'), ',')
