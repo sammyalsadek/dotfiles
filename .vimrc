@@ -4,6 +4,7 @@ source ~/.vim/configs/basic.vim
 source ~/.vim/configs/styling.vim
 source ~/.vim/configs/filetree.vim
 source ~/.vim/configs/file-search.vim
+source ~/.vim/configs/workspace.vim
 source ~/.vim/configs/text-search.vim
 source ~/.vim/configs/autocompletion.vim
 source ~/.vim/configs/mappings.vim

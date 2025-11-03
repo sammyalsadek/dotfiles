@@ -18,8 +18,3 @@ Plug 'tpope/vim-sleuth'
 Plug 'thaerkh/vim-workspace'
 Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
-
-let g:workspace_autocreate=1
-let g:workspace_create_new_tabs=0
-let g:workspace_session_directory=$HOME . "/.vim/sessions/"
-let g:workspace_undodir=$HOME . "/.vim/undodir/"
