@@ -2,6 +2,9 @@
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 
+" Open explorer
+nnoremap <c-e> :E<cr>
+
 " Global file searching
 let g:ctrlp_map = "<c-f>"
 
