@@ -58,9 +58,7 @@ function! CtagsErrorCallback(channel, msg)
 endfunction
 
 function! CtagsCallback(channel, exit_status)
-    if a:exit_status == 0
-        echomsg "Tags file generated successfully!"
-    else
+    if a:exit_status != 0
         echohl ErrorMsg
         echomsg "Failed to generate tags file: " . s:error_output
         echohl None
