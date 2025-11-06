@@ -7,4 +7,5 @@ source ~/.vim/configs/file-search.vim
 source ~/.vim/configs/workspace.vim
 source ~/.vim/configs/text-search.vim
 source ~/.vim/configs/autocompletion.vim
+source ~/.vim/configs/syntax-check.vim
 source ~/.vim/configs/mappings.vim
