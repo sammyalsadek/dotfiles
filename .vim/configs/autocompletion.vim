@@ -15,7 +15,10 @@ function! AutoComplete()
     endif
 endfunction
 
-" Tag generation
+" Tag generation with locking
+let g:ctags_generating = 0
+let g:ctags_show_success = 0
+
 augroup ctags_gen
     autocmd!
     autocmd VimEnter * call GenerateCtagsOnEnter()
@@ -25,6 +28,7 @@ augroup END
 function! GenerateCtagsOnEnter()
     if empty(eval("@%"))
         if filereadable("tags") || confirm("No tags file found. Generate it?", "&Yes\n&No", 1) == 1
+            let g:ctags_show_success = 1
             call RunCtagsCommand()
         else
             echomsg "Tags file creation aborted."
@@ -34,16 +38,13 @@ endfunction
 
 function! GenerateCtagsOnSave()
     if filereadable("tags")
+        let g:ctags_show_success = 0
         call RunCtagsCommand()
     endif
 endfunction
 
 function! RunCtagsCommand()
-    " Remove existing tags file to avoid corruption issues
-    if filereadable("tags")
-        call delete("tags")
-    endif
-
+    let g:ctags_generating = 1
     let cmd = ["ctags", "-R"]
     for dir in g:exclude_dirs
         call extend(cmd, ["--exclude=" . dir])
@@ -63,7 +64,10 @@ function! CtagsErrorCallback(channel, msg)
 endfunction
 
 function! CtagsCallback(channel, exit_status)
-    if a:exit_status != 0
+    let g:ctags_generating = 0
+    if a:exit_status == 0 && g:ctags_show_success
+        echomsg "Tags file generated successfully!"
+    elseif a:exit_status != 0
         echohl ErrorMsg
         echomsg "Failed to generate tags file: " . s:error_output
         echohl None
