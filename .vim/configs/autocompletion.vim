@@ -39,6 +39,11 @@ function! GenerateCtagsOnSave()
 endfunction
 
 function! RunCtagsCommand()
+    " Remove existing tags file to avoid corruption issues
+    if filereadable("tags")
+        call delete("tags")
+    endif
+
     let cmd = ["ctags", "-R"]
     for dir in g:exclude_dirs
         call extend(cmd, ["--exclude=" . dir])
