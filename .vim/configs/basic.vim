@@ -16,5 +16,5 @@ set scrolloff=20
 
 " Spell checking
 set spell
-set spelllang=en_us
+set spelllang=en_us,en_gb
 set spelloptions+=camel
