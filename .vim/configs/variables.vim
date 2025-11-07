@@ -4,3 +4,5 @@ let g:exclude_dirs = [
             \".builder-mcp", "figma_images", ".cache", "out", "target",
             \"release-info"
             \]
+
+let &wildignore = join(map(copy(g:exclude_dirs), '"*/" . v:val . "/*,*/" . v:val'), ',')

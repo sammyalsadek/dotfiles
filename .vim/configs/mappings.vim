@@ -1,4 +1,4 @@
-" Moving arround buffers
+" Moving around buffers
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 

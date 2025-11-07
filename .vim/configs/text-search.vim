@@ -1,7 +1,9 @@
+" File text search
 set ignorecase
 set smartcase
 set hlsearch
 
+" Global text search
 command! -nargs=+ Grep call AsyncGrep(<q-args>)
 
 function! AsyncGrep(query)

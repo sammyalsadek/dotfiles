@@ -1,7 +1,6 @@
 set path+=**
-set maxmempattern=100000
 set wildignorecase
-let &wildignore = join(map(copy(g:exclude_dirs), '"*/" . v:val . "/*,*/" . v:val'), ',')
+set maxmempattern=100000
 let g:ctrlp_cmd = "CtrlP"
 let g:ctrlp_custom_ignore = &wildignore
 let g:ctrlp_working_path_mode = ''
