@@ -11,7 +11,7 @@ set mouse=i
 " Folding
 set nofoldenable
 
-" Splits
+" Window splitting
 set splitbelow
 set splitright
 
@@ -22,3 +22,13 @@ set scrolloff=20
 set spell
 set spelllang=en_us,en_gb
 set spelloptions+=camel
+
+" Styling
+colorscheme retrobox
+set background=dark
+set number
+set relativenumber
+set cursorline
+set colorcolumn=80
+set signcolumn=yes
+autocmd BufEnter * :syntax sync fromstart
