@@ -60,6 +60,7 @@ function! FindFiles()
     setlocal cursorline
     setlocal nomodifiable
     setlocal nospell
+    setlocal colorcolumn=0
 
     mapclear <buffer>
     imapclear <buffer>
