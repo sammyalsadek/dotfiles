@@ -1,6 +1,10 @@
 " File handling
 set noswapfile
 
+" Files searching
+set path+=**
+set wildignorecase
+
 " Mouse
 set mouse=i
 

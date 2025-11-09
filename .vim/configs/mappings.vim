@@ -6,7 +6,7 @@ nnoremap <c-p> :bp<cr>
 nnoremap <c-e> :E<cr>
 
 " Global file searching
-let g:ctrlp_map = "<c-f>"
+nnoremap <c-f> :call FindFiles()<cr>
 
 " Global text searching
 nnoremap <c-g> :Grep<space>

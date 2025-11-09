@@ -16,5 +16,4 @@ call plug#begin(g:plug_dir)
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'thaerkh/vim-workspace'
-Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
