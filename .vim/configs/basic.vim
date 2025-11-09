@@ -1,7 +1,7 @@
 " File handling
 set noswapfile
 
-" Files searching
+" File searching
 set path+=**
 set wildignorecase
 
