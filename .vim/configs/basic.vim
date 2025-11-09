@@ -27,6 +27,7 @@ set scrolloff=20
 set spell
 set spelllang=en_us,en_gb
 set spelloptions+=camel
+autocmd FileType qf setlocal nospell
 
 " Styling
 colorscheme retrobox
