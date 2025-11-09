@@ -5,6 +5,11 @@ set noswapfile
 set path+=**
 set wildignorecase
 
+" File text searching
+set ignorecase
+set smartcase
+set hlsearch
+
 " Mouse
 set mouse=i
 

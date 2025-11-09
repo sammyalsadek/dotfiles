@@ -1,33 +1,29 @@
-" File text search
-set ignorecase
-set smartcase
-set hlsearch
+" Global text search command
+command! -nargs=+ Grep call s:AsyncGrep(<q-args>)
 
-" Global text search
-command! -nargs=+ Grep call AsyncGrep(<q-args>)
-
-function! AsyncGrep(query)
+function! s:AsyncGrep(query)
     cclose
     call setqflist([])
-    let cmd = ["grep", "-nR", "--ignore-case", "--exclude=tags"]
-    for dir in g:exclude_dirs
-        call extend(cmd, ["--exclude-dir=" . dir])
+
+    let l:cmd = ["grep", "-nR", "--ignore-case", "--exclude=tags"]
+    for l:dir in g:exclude_dirs
+        call extend(l:cmd, ["--exclude-dir=" . l:dir])
     endfor
-    call extend(cmd, [a:query])
-    call job_start(cmd, {
-                \ "out_io": "pipe",
-                \ "err_io": "pipe",
-                \ "out_cb": "AsyncGrepCallback",
-                \ "close_cb": "AsyncGrepDone"
-                \ })
+    call extend(l:cmd, [a:query])
+
+    call job_start(l:cmd, #{
+        \ out_io: "pipe",
+        \ err_io: "pipe",
+        \ out_cb: "s:AsyncGrepCallback",
+        \ close_cb: "s:AsyncGrepDone"
+        \ })
     echomsg "Searching..."
+endfunction
 
-    function! AsyncGrepCallback(channel, msg)
-        caddexpr a:msg
-    endfunction
+function! s:AsyncGrepCallback(channel, msg)
+    caddexpr a:msg
+endfunction
 
-    function! AsyncGrepDone(channel)
-        echomsg "Search complete!"
-        copen
-    endfunction
+function! s:AsyncGrepDone(channel)
+    copen
 endfunction

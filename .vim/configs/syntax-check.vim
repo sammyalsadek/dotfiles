@@ -1,18 +1,18 @@
-let g:syntax_errors = {}
-let g:syntax_check_running = 0
+let s:syntax_errors = {}
+let s:syntax_check_running = 0
 
-function! SyntaxCheck()
+function! s:SyntaxCheck()
     " Skip if already running or in insert mode
-    if g:syntax_check_running || mode() =~ '^i'
+    if s:syntax_check_running || mode() =~ '^i'
         return
     endif
 
     " Clear previous signs and errors
     sign unplace *
-    let g:syntax_errors = {}
-    let g:syntax_check_running = 1
-    
-    let checkers = {
+    let s:syntax_errors = {}
+    let s:syntax_check_running = 1
+
+    let l:checkers = {
         \ 'vim': ['vim', '-e', '-s', '-c', 'source ' . expand('%') . ' | qall!'],
         \ 'sh': ['bash', '-n', expand('%')],
         \ 'zsh': ['zsh', '-n', expand('%')],
@@ -23,54 +23,54 @@ function! SyntaxCheck()
         \ 'typescript': ['tsc', '--noEmit', expand('%')],
         \ 'python': ['python', '-m', 'py_compile', expand('%')]
         \ }
-    
-    if has_key(checkers, &filetype)
-        let g:syntax_check_output = []
-        let g:syntax_check_file = expand('%:p')
-        call job_start(checkers[&filetype], {
+
+    if has_key(l:checkers, &filetype)
+        let s:syntax_check_output = []
+        let s:syntax_check_file = expand('%:p')
+        call job_start(l:checkers[&filetype], {
             \ "out_io": "pipe",
             \ "err_io": "pipe",
-            \ "err_cb": "SyntaxCheckCallback",
-            \ "close_cb": "SyntaxCheckDone"
+            \ "err_cb": "s:SyntaxCheckCallback",
+            \ "close_cb": "s:SyntaxCheckDone"
             \ })
     else
-        let g:syntax_check_running = 0
+        let s:syntax_check_running = 0
     endif
 endfunction
 
-function! SyntaxCheckCallback(channel, msg)
-    call add(g:syntax_check_output, a:msg)
+function! s:SyntaxCheckCallback(channel, msg)
+    call add(s:syntax_check_output, a:msg)
 endfunction
 
-function! SyntaxCheckDone(channel)
-    let g:syntax_check_running = 0
+function! s:SyntaxCheckDone(channel)
+    let s:syntax_check_running = 0
 
     " Only show errors if we're still in the same file, and if not rerun check
-    if g:syntax_check_file != expand('%:p')
-        call SyntaxCheck()
+    if s:syntax_check_file != expand('%:p')
+        call s:SyntaxCheck()
         return
     endif
-    
+
     " Parse errors and store them
-    for line in g:syntax_check_output
-        let parts = split(line, ':')
-        if len(parts) >= 3
-            let line_num = str2nr(parts[1])
-            if line_num > 0
-                let g:syntax_errors[line_num] = trim(join(parts[2:], ':'))
-                execute 'sign place ' . line_num . ' line=' . line_num . ' name=SyntaxError file=' . expand('%:p')
+    for l:line in s:syntax_check_output
+        let l:parts = split(l:line, ':')
+        if len(l:parts) >= 3
+            let l:line_num = str2nr(l:parts[1])
+            if l:line_num > 0
+                let s:syntax_errors[l:line_num] = trim(join(l:parts[2:], ':'))
+                execute 'sign place ' . l:line_num . ' line=' . l:line_num . ' name=SyntaxError file=' . expand('%:p')
             endif
         endif
     endfor
     " Force show error for current line
-    call ShowErrorMessage()
+    call s:ShowErrorMessage()
 endfunction
 
-function! ShowErrorMessage()
-    let line_num = line('.')
-    if has_key(g:syntax_errors, line_num)
+function! s:ShowErrorMessage()
+    let l:line_num = line('.')
+    if has_key(s:syntax_errors, l:line_num)
         redraw
-        echo g:syntax_errors[line_num]
+        echo s:syntax_errors[l:line_num]
     else
         echo ""
     endif
@@ -79,7 +79,7 @@ endfunction
 " Define error sign
 sign define SyntaxError text=>> texthl=ErrorMsg
 
-autocmd BufEnter * silent! call SyntaxCheck()
-autocmd TextChanged * silent! write | call SyntaxCheck()
-autocmd InsertLeave * silent! write | call SyntaxCheck()
-autocmd CursorMoved,CursorMovedI * call ShowErrorMessage()
+autocmd BufEnter * silent! call s:SyntaxCheck()
+autocmd TextChanged * silent! write | call s:SyntaxCheck()
+autocmd InsertLeave * silent! write | call s:SyntaxCheck()
+autocmd CursorMoved,CursorMovedI * call s:ShowErrorMessage()

@@ -2,70 +2,68 @@
 set pumheight=10
 set completeopt=menu,menuone,noinsert,noselect
 
+" Script-local state
+let s:ctags_generating = 0
+let s:ctags_show_success = 0
+let s:error_output = ""
+
 " Auto-trigger completion after 1 character
-autocmd InsertCharPre * call AutoComplete()
-function! AutoComplete()
+function! s:AutoComplete()
     if pumvisible() | return | endif
-    let char = v:char
-    " Trigger on any word character
-    if char =~ '\w'
+    let l:char = v:char
+    if l:char =~ '\w'
         call feedkeys("\<C-n>", 'n')
-    elseif char =~ '\W' && pumvisible()
+    elseif l:char =~ '\W' && pumvisible()
         call feedkeys("\<C-e>", 'n')
     endif
 endfunction
 
-" Tag generation with locking
-let g:ctags_generating = 0
-let g:ctags_show_success = 0
+autocmd InsertCharPre * call s:AutoComplete()
 
-augroup ctags_gen
-    autocmd!
-    autocmd VimEnter * call GenerateCtagsOnEnter()
-    autocmd BufWritePost * call GenerateCtagsOnSave()
-augroup END
-
-function! GenerateCtagsOnEnter()
+" Generate ctags on vim enter
+function! s:GenerateCtagsOnEnter()
     if empty(eval("@%"))
         if filereadable("tags") || confirm("No tags file found. Generate it?", "&Yes\n&No", 1) == 1
-            let g:ctags_show_success = 1
-            call RunCtagsCommand()
+            let s:ctags_show_success = 1
+            call s:RunCtagsCommand()
         else
             echomsg "Tags file creation aborted."
         endif
     endif
 endfunction
 
-function! GenerateCtagsOnSave()
+" Generate ctags on file save
+function! s:GenerateCtagsOnSave()
     if filereadable("tags")
-        let g:ctags_show_success = 0
-        call RunCtagsCommand()
+        let s:ctags_show_success = 0
+        call s:RunCtagsCommand()
     endif
 endfunction
 
-function! RunCtagsCommand()
-    let g:ctags_generating = 1
-    let cmd = ["ctags", "-R"]
-    for dir in g:exclude_dirs
-        call extend(cmd, ["--exclude=" . dir])
+" Run ctags command
+function! s:RunCtagsCommand()
+    let s:ctags_generating = 1
+    let l:cmd = ["ctags", "-R"]
+    for l:dir in g:exclude_dirs
+        call extend(l:cmd, ["--exclude=" . l:dir])
     endfor
-    call extend(cmd, ["."])
-    call job_start(cmd, {
-                \ "out_io": "pipe",
-                \ "err_io": "pipe",
-                \ "exit_cb": "CtagsCallback",
-                \ "err_cb": "CtagsErrorCallback",
-                \})
+    call extend(l:cmd, ["."])
+    call job_start(l:cmd, #{
+        \ out_io: "pipe",
+        \ err_io: "pipe",
+        \ exit_cb: "s:CtagsCallback",
+        \ err_cb: "s:CtagsErrorCallback",
+        \ })
     let s:error_output = ""
 endfunction
 
-function! CtagsErrorCallback(channel, msg)
+function! s:CtagsErrorCallback(channel, msg)
     let s:error_output .= a:msg . "\n"
 endfunction
 
-function! CtagsCallback(channel, exit_status)
-    let g:ctags_generating = 0
-    if a:exit_status == 0 && g:ctags_show_success
+function! s:CtagsCallback(channel, exit_status)
+    let s:ctags_generating = 0
+    if a:exit_status == 0 && s:ctags_show_success
         echomsg "Tags file generated successfully!"
     elseif a:exit_status != 0
         echohl ErrorMsg
@@ -73,3 +71,9 @@ function! CtagsCallback(channel, exit_status)
         echohl None
     endif
 endfunction
+
+augroup ctags_gen
+    autocmd!
+    autocmd VimEnter * call s:GenerateCtagsOnEnter()
+    autocmd BufWritePost * call s:GenerateCtagsOnSave()
+augroup END
