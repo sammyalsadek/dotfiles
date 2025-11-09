@@ -37,4 +37,5 @@ set relativenumber
 set cursorline
 set colorcolumn=80
 set signcolumn=yes
+autocmd FileType qf setlocal colorcolumn=0
 autocmd BufEnter * :syntax sync fromstart
