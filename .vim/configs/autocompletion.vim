@@ -32,14 +32,6 @@ function! s:GenerateCtagsOnEnter()
     endif
 endfunction
 
-" Generate ctags on file save
-function! s:GenerateCtagsOnSave()
-    if filereadable("tags")
-        let s:ctags_show_success = 0
-        call s:RunCtagsCommand()
-    endif
-endfunction
-
 " Run ctags command
 function! s:RunCtagsCommand()
     let s:ctags_generating = 1
@@ -75,5 +67,4 @@ endfunction
 augroup ctags_gen
     autocmd!
     autocmd VimEnter * call s:GenerateCtagsOnEnter()
-    autocmd BufWritePost * call s:GenerateCtagsOnSave()
 augroup END
