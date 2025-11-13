@@ -28,14 +28,15 @@ set spell
 set spelllang=en_us,en_gb
 set spelloptions+=camel
 autocmd FileType qf setlocal nospell
+autocmd TerminalOpen * setlocal nospell
 
 " Styling
 colorscheme retrobox
 set background=dark
-set number
-set relativenumber
+set number relativenumber
 set cursorline
 set colorcolumn=80
 set signcolumn=yes
-autocmd FileType qf setlocal colorcolumn=0
 autocmd BufEnter * :syntax sync fromstart
+autocmd FileType qf setlocal colorcolumn=0
+autocmd TerminalOpen * setlocal nonumber norelativenumber
